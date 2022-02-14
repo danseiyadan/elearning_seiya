@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   # before_action :logged_in_user, except: [:new, :create]
   # only_loggedin_usersと機能がかぶっているからいらないはず。
   before_action :correct_user, only: [:edit, :destroy]
-  # destroyも普通は入れる。入ってないから今は消せる。
   before_action :only_loggedin_users, only: [:index, :show, :edit, :update, :destroy]
 
   def new

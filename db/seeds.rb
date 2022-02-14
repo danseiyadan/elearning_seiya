@@ -16,7 +16,14 @@ name = Faker::Name.name
 email = "username#{n+1}@email.com"
 password = "password"
 User.create!(name: name,
-      email: email,
-      password: password,
-      password_confirmation: password)
+             email: email,
+             password: password,
+             password_confirmation: password)
+end
+
+20.times do |n|
+title = Faker::Hobby.unique.activity
+description = Faker::Lorem.sentence(word_count: 3)
+Category.create!(title: title,
+                 description: description)
 end
