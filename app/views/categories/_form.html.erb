@@ -1,0 +1,11 @@
+<!-- This is form for: categories -->
+<%= form_with(model: @category, local: true) do |f| %>
+    <%= render "shared/error_messages", object: f.object %>
+    <div class="mb-3">
+        <%= f.text_field :title, class: "form-control", placeholder: "Title" %>
+    </div>
+    <div class="mb-3">
+        <%= f.text_field :description, class: "form-control", placeholder: "Description" %>
+    </div>
+    <%= f.submit btn_msg, class: "btn btn-success w-100" %>
+<% end %>

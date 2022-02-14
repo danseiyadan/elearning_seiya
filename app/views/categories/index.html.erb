@@ -1,0 +1,44 @@
+<!-- This is index for: categories -->
+<% provide(:title, "Admin") %>
+<div class="form content">
+    <div class="card" style="width: 40rem;">
+        <div class="card-header">
+            Manage lessons
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <tr>
+                    <%= link_to "Create new lesson", new_category_path %>
+                </tr>
+                <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">No. of words</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                <thead>
+                <tbody>
+                    <% @categories.each do |category| %>
+                        <tr>
+                            <td> 
+                                <%= link_to category.title, category %> 
+                            </td>
+                            <td> 
+                                <%= category.description %> 
+                            </td>
+                            <td>
+                                To be added
+                            </td>
+                            <td> 
+                                <%= link_to "update", edit_category_path(category) %>
+                                <%= link_to "delete", category_path(category), method: :delete, data: {confirm: "Are you sure?"}, class: "text-danger" %> 
+                            </td>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+            <%= will_paginate %>
+        </div>
+    </div>
+</div>
