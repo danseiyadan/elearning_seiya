@@ -1,4 +1,6 @@
 class CategoriesController < ApplicationController
+  before_action :only_loggedin_users
+
   def new
     @category = Category.new
   end
@@ -33,6 +35,7 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
+    @words = @category.words.paginate(page: params[:page], per_page: 5)
   end
 
   def destroy

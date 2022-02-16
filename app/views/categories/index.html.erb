@@ -28,11 +28,11 @@
                                 <%= category.description %> 
                             </td>
                             <td>
-                                To be added
+                                <%= category.words.count %>
                             </td>
                             <td> 
-                                <%= link_to "update", edit_category_path(category) %>
-                                <%= link_to "delete", category_path(category), method: :delete, data: {confirm: "Are you sure?"}, class: "text-danger" %> 
+                                <%= link_to "Edit", edit_category_path(category) %>
+                                <%= link_to "Delete", category_path(category), method: :delete, data: {confirm: "Are you sure?"}, class: "text-danger" %> 
                             </td>
                         </tr>
                     <% end %>

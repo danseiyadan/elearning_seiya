@@ -10,6 +10,12 @@ Rails.application.routes.draw do
   get "/logout", to: 'sessions#destroy'
   resource :sessions, only: :create
 
-  resources :categories
+  resources :categories do
+    resources :words, only: [:new, :create, :edit, :update, :destroy]
+    namespace :admin do
+      resources :categories
+    end
+  end
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
