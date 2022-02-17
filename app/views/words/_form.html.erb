@@ -1,0 +1,24 @@
+<!-- This is form for: words -->
+<%= form_with(model: [@category, @word], local: true) do |f| %>
+    <%= render "shared/error_messages", object: f.object %>
+    <div class="mb-3">
+        <%= f.text_field :content, class: "form-control", placeholder: "Word" %>
+    </div>
+    <div class="mb-3">
+        <%= f.fields_for :choices do |choice| %>
+            <div class="row">
+                <div class="col">
+                    <%= choice.text_field :content, class: "form-control", placeholder: "Choice" %>
+                </div>
+                <div class="col">
+                    <%= choice.check_box :is_correct, class: "form-check", style: "display: inline-block;" %>
+                    <%= 
+                        choice.label :is_correct, "This is the answer", style: "display: inline-block;"
+                    %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+    <%= f.submit btn_msg, class: "btn btn-success w-100" %>
+<% end %>
+<%= link_to "Cancel", categories_path, class: "btn btn-danger w-100" %>

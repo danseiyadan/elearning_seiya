@@ -34,4 +34,15 @@ module SessionsHelper
   end
   # current_userかどうかの判断。ビューで判断結果を使うために、application_controlerで読み込んでいるこのページで定義。
   # メソッドでも使えるからいくつか綺麗にできるかも？
+
+  def only_loggedin_users
+    unless logged_in?
+      flash[:danger] = "Please login first."
+      redirect_to login_url
+    end
+  end
+
+  def admin_user?
+    current_user.is_admin
+  end
 end

@@ -15,3 +15,6 @@
     </div>
     <%= f.submit btn_msg, class: "btn btn-success w-100" %>
 <% end %>
+<% if logged_in?  %>
+    <%= link_to "Cancel", @user, class: "btn btn-danger w-100" %>
+<% end %>

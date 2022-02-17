@@ -58,11 +58,4 @@ class UsersController < ApplicationController
       redirect_back fallback_location: root_path
     end
   end
-
-  def only_loggedin_users
-    unless logged_in?
-      flash[:danger] = "Please login first."
-      redirect_to login_url
-    end
-  end
 end
