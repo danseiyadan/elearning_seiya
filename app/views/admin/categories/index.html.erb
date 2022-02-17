@@ -1,4 +1,4 @@
-<!-- This is index for: categories -->
+<!-- This is index for: admin_categories -->
 <% provide(:title, "Admin") %>
 <div class="form content">
     <div class="card" style="width: 40rem;">
@@ -8,7 +8,7 @@
         <div class="card-body">
             <table class="table">
                 <tr>
-                    <%= link_to "Create new lesson", new_category_path %>
+                    <%= link_to "Create new lesson", new_admin_category_path %>
                 </tr>
                 <thead>
                     <tr>
@@ -22,7 +22,7 @@
                     <% @categories.each do |category| %>
                         <tr>
                             <td> 
-                                <%= link_to category.title, category %> 
+                                <%= link_to category.title, admin_category_path(category) %> 
                             </td>
                             <td> 
                                 <%= category.description %> 
@@ -31,8 +31,8 @@
                                 <%= category.words.count %>
                             </td>
                             <td> 
-                                <%= link_to "Edit", edit_category_path(category) %>
-                                <%= link_to "Delete", category_path(category), method: :delete, data: {confirm: "Are you sure?"}, class: "text-danger" %> 
+                                <%= link_to "Edit", edit_admin_category_path(category) %>
+                                <%= link_to "Delete", admin_category_path(category), method: :delete, data: {confirm: "Are you sure?"}, class: "text-danger" %> 
                             </td>
                         </tr>
                     <% end %>

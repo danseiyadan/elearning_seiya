@@ -1,5 +1,5 @@
-<!-- This is form for: words -->
-<%= form_with(model: [@category, @word], local: true) do |f| %>
+<!-- This is form for: admin_words -->
+<%= form_with(model: [:admin, @category, @word], local: true) do |f| %>
     <%= render "shared/error_messages", object: f.object %>
     <div class="mb-3">
         <%= f.text_field :content, class: "form-control", placeholder: "Word" %>
@@ -21,4 +21,4 @@
     </div>
     <%= f.submit btn_msg, class: "btn btn-success w-100" %>
 <% end %>
-<%= link_to "Cancel", categories_path, class: "btn btn-danger w-100" %>
+<%= link_to "Cancel", admin_category_path(@category.id), class: "btn btn-danger w-100" %>

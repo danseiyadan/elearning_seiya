@@ -1,5 +1,5 @@
-class CategoriesController < ApplicationController
-  before_action :only_loggedin_users
+class Admin::CategoriesController < ApplicationController
+  before_action :admin_login
 
   def new
     @category = Category.new
@@ -9,7 +9,7 @@ class CategoriesController < ApplicationController
     @category = Category.new(category_params)
     if @category.save
       flash[:success] = "New lesson added!"
-      redirect_to categories_path
+      redirect_to admin_categories_path
     else
       render "new"
     end
@@ -23,7 +23,7 @@ class CategoriesController < ApplicationController
     @category = Category.find(params[:id])
     if @category.update(category_params)
       flash[:success] = "Lesson information updated!"
-      redirect_to categories_path
+      redirect_to admin_categories_path
     else
       render "edit"
     end
@@ -40,7 +40,7 @@ class CategoriesController < ApplicationController
 
   def destroy
     Category.find(params[:id]).destroy
-    redirect_to categories_path
+    redirect_to admin_categories_path
   end
 
   private
