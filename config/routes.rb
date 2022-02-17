@@ -5,17 +5,20 @@ Rails.application.routes.draw do
   get '/about', to: 'pages#about'
 
   resources :users
+    namespace :admin do
+      resources :users, only: [:update]
+    end
 
   get "/login", to: 'sessions#new'
   get "/logout", to: 'sessions#destroy'
   resource :sessions, only: :create
 
-  resources :categories do
-    resources :words, only: [:new, :create, :edit, :update, :destroy]
-    namespace :admin do
-      resources :categories
+  namespace :admin do
+    resources :categories do
+      resources :words, only: [:new, :create, :edit, :update, :destroy]
     end
   end
+  get "/admin", to: "admin/categories#index"
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

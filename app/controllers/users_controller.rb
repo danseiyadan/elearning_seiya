@@ -52,8 +52,8 @@ class UsersController < ApplicationController
   end
 
   def correct_user 
-    user = User.find(params[:id]) #editページに行く際に使われるから、そのページのid情報を参照する。
-    if user != current_user # ビューで使わないから@は付ける必要がないみたい。
+    user = User.find(params[:id])
+    unless user == current_user || admin_user?
       flash[:danger] = "You are not authorized."
       redirect_back fallback_location: root_path
     end

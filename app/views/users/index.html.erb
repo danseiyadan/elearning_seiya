@@ -10,7 +10,9 @@
                 <thead>
                     <tr>
                         <th scope="col">Name</th>
-                        <th scope="col">Actions</th>
+                        <% if admin_user? %>
+                            <th scope="col">Actions</th>
+                        <% end %>
                     </tr>
                 <thead>
                 <tbody>
@@ -20,9 +22,17 @@
                                 <%= gravatar_for user, size: 52 %>
                                 <%= link_to user.name, user %> 
                             </td>
-                            <td> 
-                                <%= link_to "delete", user_path(user), method: :delete, data: {confirm: "Are you sure?"}, class: "text-danger" %> 
-                            </td>
+                            <% if admin_user?%>
+                            <% next if user == current_user %>
+                                <td> 
+                                    <% if user.is_admin %>
+                                        <%= link_to "Remove from admin", admin_user_path(user, is_admin: false), method: :patch, class: "text-warning" %>
+                                    <% else %>
+                                        <%= link_to "Make admin", admin_user_path(user, is_admin: true), method: :patch, class: "text-info" %>
+                                    <% end %>
+                                    <%= link_to "delete", user_path(user), method: :delete, data: {confirm: "Are you sure?"}, class: "text-danger" %> 
+                                </td>
+                            <% end %>
                         </tr>
                     <% end %>
                 </tbody>

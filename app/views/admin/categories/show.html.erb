@@ -1,4 +1,4 @@
-<!-- This is index for: categories -->
+<!-- This is index for: admin_categories -->
 <% provide(:title, @category.title)  %>
 <div class="form content">
     <div class="card" style="width: 40rem;">
@@ -8,7 +8,7 @@
         <div class="card-body">
             <table class="table">
                 <tr>
-                    <%= link_to "Add new word", new_category_word_path(@category.id) %>
+                    <%= link_to "Add new word", new_admin_category_word_path(@category.id) %>
                 </tr>
                 <br>
                 <tr>
@@ -31,9 +31,9 @@
                                 <%= word.choices.find_by(is_correct: true).content %>
                             </td>
                             <td>
-                                <%= link_to "Edit", edit_category_word_path(@category.id, word.id) %>
+                                <%= link_to "Edit", edit_admin_category_word_path(@category.id, word.id) %>
                                 <%= 
-                                    link_to "Delete",category_word_path(@category.id, word.id),
+                                    link_to "Delete",admin_category_word_path(@category.id, word.id),
                                     method: :delete, data: {confirm: "Are you sure?"}, class: "text-danger"
                                 %>
                             </td>

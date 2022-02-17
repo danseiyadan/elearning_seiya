@@ -1,5 +1,5 @@
-class WordsController < ApplicationController
-  before_action :only_loggedin_users
+class Admin::WordsController < ApplicationController
+  before_action :admin_login
 
   def new
     @category = Category.find(params[:category_id])
@@ -14,7 +14,7 @@ class WordsController < ApplicationController
     @word = @category.words.build(word_params)
     if @word.save
       flash[:success] = "New word added!"
-      redirect_to @category
+      redirect_to admin_category_path(@category.id)
     else
       render "new"
     end
@@ -30,7 +30,7 @@ class WordsController < ApplicationController
     @word = @category.words.find(params[:id])
     if @word.update(word_params)
       flash[:success] = "Word updated!"
-      redirect_to @category
+      redirect_to admin_category_path(@category.id)
     else
       render "edit"
     end
@@ -39,7 +39,7 @@ class WordsController < ApplicationController
   def destroy
     @category = Category.find(params[:category_id])
     @category.words.find(params[:id]).destroy
-    redirect_to @category
+    redirect_to admin_category_path(@category.id)
   end
 
   private
