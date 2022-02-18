@@ -1,0 +1,42 @@
+<!-- This is index for: lessons -->
+<% provide(:title, "Lessons") %>
+<div class="form content">
+    <div class="card" style="width: 40rem;">
+        <div class="card-header">
+            List of lessons
+        </div>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Title</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                <thead>
+                <tbody>
+                    <% @categories.each do |category| %>
+                        <tr>
+                            <td> 
+                                <%= category.title %> 
+                            </td>
+                            <td> 
+                                <%= category.description %> 
+                            </td>
+                            <% if category.lessons.find_by(user_id: current_user.id) %>
+                                <td> 
+                                    <%= link_to "View your result", lesson_path(category.lessons.first.id), class: "text-info" %>
+                                </td>
+                            <% else %>
+                                <td> 
+                                    <%= link_to "Start", lessons_path(user_id: current_user.id, category_id: category.id, result: 0), method: :post, class: "text-info" %>
+                                </td>
+                            <% end %>
+                        </tr>
+                    <% end %>
+                </tbody>
+            </table>
+            <%= will_paginate @categories %>
+        </div>
+    </div>
+</div>
