@@ -3,11 +3,7 @@ class LessonsController < ApplicationController
     @category = Category.find(params[:category_id])
     @lesson = @category.lessons.build(lesson_params)
     @lesson.save
-    redirect_to @lesson # just for now
-  end
-
-  def update
-    
+    redirect_to new_lesson_answer_path(@lesson.id)
   end
 
   def index
@@ -20,6 +16,6 @@ class LessonsController < ApplicationController
 
   private
   def lesson_params
-    params.permit(:result, :category_id, :user_id)
+    params.permit(:category_id, :user_id)
   end
 end

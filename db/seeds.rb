@@ -6,26 +6,56 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create!(name: "Seiya Takahashi",
-             email: "seiyatakahashi@email.com",
-             password: "password",
-             password_confirmation: "password",
-             is_admin: true)
+User.create!(
+  name: "Seiya Takahashi",
+  email: "seiyatakahashi@email.com",
+  password: "password",
+  password_confirmation: "password",
+  is_admin: true)
  
 99.times do |n|
 name = Faker::Name.name
 email = "username#{n+1}@email.com"
 password = "password"
-User.create!(name: name,
-             email: email,
-             password: password,
-             password_confirmation: password,
-             is_admin: false)
+User.create!(
+  name: name,
+  email: email,
+  password: password,
+  password_confirmation: password,
+  is_admin: false)
 end
 
 20.times do |n|
 title = Faker::Hobby.unique.activity
 description = Faker::Lorem.sentence(word_count: 3)
-Category.create!(title: title,
-                 description: description)
+Category.create!(
+  title: title,
+  description: description
+  # words: [
+  #     {
+  #       content: "Test 1",
+  #       choices: [
+  #         {content: "Choice 1", is_correct: true},
+  #         {content: "Choice 2", is_correct: false},
+  #         {content: "Choice 3", is_correct: false}
+  #       ]
+  #     },
+  #     {
+  #       content: "Test 2",
+  #       choices: [
+  #         {content: "Choice 1", is_correct: true},
+  #         {content: "Choice 2", is_correct: false},
+  #         {content: "Choice 3", is_correct: false}
+  #       ]
+  #     },
+  #     {
+  #       content: "Test 3",
+  #       choices: [
+  #         {content: "Choice 1", is_correct: true},
+  #         {content: "Choice 2", is_correct: false},
+  #         {content: "Choice 3", is_correct: false}
+  #       ]
+  #     }
+  #   ]
+  )
 end
