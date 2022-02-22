@@ -6,7 +6,7 @@
                 <% provide(:title, "Answering #{word.content}") %>
                 <h1 class="text-center mt-4"> <%= word.content %> </h1>
                 <% word.choices.each do |choice| %>
-                    <%= link_to choice.content, lesson_answers_path(choice_id: choice.id, word_id: word.id, lesson_id: @lesson.id), method: :post, class: "pagination" %>
+                    <%= link_to choice.content, lesson_answers_path(choice_id: choice.id, word_id: word.id, lesson_id: @lesson.id, page: @words.next_page), method: :post, class: "pagination" %>
                 <% end %>
             <% end %>
             <% will_paginate @words %>

@@ -12,6 +12,7 @@ class LessonsController < ApplicationController
 
   def show
     @lesson = Lesson.find(params[:id])
+    @answers = @lesson.answers.all
   end
 
   private

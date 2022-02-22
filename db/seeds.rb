@@ -30,32 +30,38 @@ title = Faker::Hobby.unique.activity
 description = Faker::Lorem.sentence(word_count: 3)
 Category.create!(
   title: title,
-  description: description
-  # words: [
-  #     {
-  #       content: "Test 1",
-  #       choices: [
-  #         {content: "Choice 1", is_correct: true},
-  #         {content: "Choice 2", is_correct: false},
-  #         {content: "Choice 3", is_correct: false}
-  #       ]
-  #     },
-  #     {
-  #       content: "Test 2",
-  #       choices: [
-  #         {content: "Choice 1", is_correct: true},
-  #         {content: "Choice 2", is_correct: false},
-  #         {content: "Choice 3", is_correct: false}
-  #       ]
-  #     },
-  #     {
-  #       content: "Test 3",
-  #       choices: [
-  #         {content: "Choice 1", is_correct: true},
-  #         {content: "Choice 2", is_correct: false},
-  #         {content: "Choice 3", is_correct: false}
-  #       ]
-  #     }
-  #   ]
-  )
+  description: description)
+end
+
+categories = Category.all
+categories.each do |category|
+  category.words.create!([
+    {
+      content: "#{category.title} - Test 1",
+      category_id: category.id,
+      choices_attributes: [
+        {content: "#{category.title} - Choice 1", is_correct: true},
+        {content: "#{category.title} - Choice 2", is_correct: false},
+        {content: "#{category.title} - Choice 3", is_correct: false}
+      ]
+    },
+    {
+      content: "#{category.title} - Test 2",
+      category_id: category.id,
+      choices_attributes: [
+        {content: "#{category.title} - Choice 1", is_correct: true},
+        {content: "#{category.title} - Choice 2", is_correct: false},
+        {content: "#{category.title} - Choice 3", is_correct: false}
+      ]
+    },
+    {
+      content: "#{category.title} - Test 3",
+      category_id: category.id,
+      choices_attributes: [
+        {content: "#{category.title} - Choice 1", is_correct: true},
+        {content: "#{category.title} - Choice 2", is_correct: false},
+        {content: "#{category.title} - Choice 3", is_correct: false}
+      ]
+    },
+  ])
 end
