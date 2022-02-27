@@ -1,16 +1,20 @@
+<!-- This is new for: sessions -->
 <% provide(:title, "Login") %>
-<div class="row">
-    <div class="col-4 mx-auto">
+<div class="row py-4 my-auto justify-content-md-center">
+    <div class="col-5">
+        <img src="/assets/login-image.jpg" style="width: 100%;">
+    </div>
+    <div class="col-5">
         <h1 class="text-center mt-4">Login</h1>
         <%= form_with(url: sessions_path, scope: :session, local: true) do |f| %>
             <!-- scope: sessionはsession controllerで受け取るため？ -->
-            <div class="mb-3">
+            <div class="my-3">
                 <%= f.email_field :email, class: "form-control", placeholder: "Email" %>
             </div>
             <div class="mb-3">
                 <%= f.password_field :password, class: "form-control", placeholder: "Password" %>
             </div>
-            <%= f.submit "Login", class: "btn btn-primary w-100" %>
+            <%= f.submit "Login", class: "btn w-100 yellow-btn" %>
         <% end %>
     </div>
 </div>

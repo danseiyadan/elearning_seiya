@@ -6,11 +6,11 @@
     </div>
     <div class="mb-3">
         <%= f.fields_for :choices do |choice| %>
-            <div class="row">
+            <div class="row mb-1">
                 <div class="col">
                     <%= choice.text_field :content, class: "form-control", placeholder: "Choice" %>
                 </div>
-                <div class="col">
+                <div class="col py-auto align-self-center">
                     <%= choice.check_box :is_correct, class: "form-check", style: "display: inline-block;" %>
                     <%= 
                         choice.label :is_correct, "This is the answer", style: "display: inline-block;"
@@ -19,6 +19,6 @@
             </div>
         <% end %>
     </div>
-    <%= f.submit btn_msg, class: "btn btn-success w-100" %>
+    <%= f.submit btn_msg, class: "btn w-100 yellow-btn mt-3" %>
 <% end %>
-<%= link_to "Cancel", admin_category_path(@category.id), class: "btn btn-danger w-100" %>
+<%= link_to "Cancel", admin_category_path(@category.id), class: "btn w-100 transparent-btn" %>

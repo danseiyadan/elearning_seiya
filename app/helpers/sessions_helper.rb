@@ -45,4 +45,10 @@ module SessionsHelper
   def admin_user?
     current_user.is_admin
   end
+
+  def already_loggedin
+    if logged_in?
+      redirect_to root_url
+    end
+  end
 end

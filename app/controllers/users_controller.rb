@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   # only_loggedin_usersと機能がかぶっているからいらないはず。
   before_action :correct_user, only: [:edit, :destroy]
   before_action :only_loggedin_users, only: [:index, :show, :edit, :update, :destroy]
+  before_action :already_loggedin, only: :new
 
   def new
     @user = User.new

@@ -1,15 +1,4 @@
-<% if logged_in? %>
-    <% provide(:title, "Dashboard") %>
-    <div class="jumbotron mt-5">
-        <h1 class="display-4"> <%= "Hello, #{current_user.name}" %> </h1>
-    </div>
-<% else %>
-    <% provide(:title, "Home")  %>
-    <div class="jumbotron mt-5">
-        <h1 class="display-4">Let's learn together!</h1>
-        <p class="lead">Learning is key to freedom.</p>
-        <hr class="my-4">
-        <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-        <%= link_to "Learn more", about_path, class: "btn btn-primary btn-lg"%>
-    </div>
-<% end %>
+<% provide(:title, "Dashboard") %>
+<div class="jumbotron mt-5">
+    <h1 class="display-4"> <%= "Hello, #{current_user.name}" %> </h1>
+</div>

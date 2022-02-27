@@ -1,44 +1,42 @@
 <!-- This is index for: admin_categories -->
 <% provide(:title, "Admin") %>
-<div class="form content">
-    <div class="card" style="width: 40rem;">
-        <div class="card-header">
-            Manage lessons
-        </div>
-        <div class="card-body">
-            <table class="table">
-                <tr>
-                    <%= link_to "Create new lesson", new_admin_category_path %>
-                </tr>
-                <thead>
-                    <tr>
-                        <th scope="col">Title</th>
-                        <th scope="col">Description</th>
-                        <th scope="col">No. of words</th>
-                        <th scope="col">Actions</th>
-                    </tr>
-                <thead>
-                <tbody>
-                    <% @categories.each do |category| %>
-                        <tr>
-                            <td> 
-                                <%= link_to category.title, admin_category_path(category) %> 
-                            </td>
-                            <td> 
-                                <%= category.description %> 
-                            </td>
-                            <td>
-                                <%= category.words.count %>
-                            </td>
-                            <td> 
-                                <%= link_to "Edit", edit_admin_category_path(category) %>
-                                <%= link_to "Delete", admin_category_path(category), method: :delete, data: {confirm: "Are you sure?"}, class: "text-danger" %> 
-                            </td>
-                        </tr>
-                    <% end %>
-                </tbody>
-            </table>
-            <%= will_paginate %>
+<div class="row mt-5">
+    <div class="col py-auto">
+        <h1>Manage lessons</h1>
+    </div>
+    <div class="col py-auto align-self-center">
+        <div class="d-flex justify-content-center justify-content-md-end">
+            <%= link_to "Create new lesson", new_admin_category_path, class: "btn w-40 yellow-btn" %>
         </div>
     </div>
 </div>
+<table class="table mt-3">
+    <thead>
+        <tr>
+            <th style="width: 20%;">Title</th>
+            <th style="width: 40%;">Description</th>
+            <th style="width: 20%;">No. of words</th>
+            <th style="width: 20%;">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @categories.each do |category| %>
+            <tr>
+                <td> 
+                    <%= link_to category.title, admin_category_path(category), class:"link" %> 
+                </td>
+                <td> 
+                    <%= category.description %> 
+                </td>
+                <td>
+                    <%= category.words.count %>
+                </td>
+                <td> 
+                    <%= link_to "Edit", edit_admin_category_path(category), class:"btn w-10 brown-btn" %>
+                    <%= link_to "Delete", admin_category_path(category), method: :delete, data: {confirm: "Are you sure?"}, class: "btn w-10 red-btn" %> 
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>
+<%= will_paginate %>
