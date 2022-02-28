@@ -13,7 +13,7 @@
     <div class="mb-3">
         <%= f.password_field :password_confirmation, class: "form-control", placeholder: "Password Confirmation" %>
     </div>
-    <%= f.submit btn_msg, class: "btn btn-success w-100" %>
+    <%= f.submit btn_msg, class: "btn w-100 yellow-btn" %>
 <% end %>
 <% if logged_in?  %>
     <%= link_to "Cancel", @user, class: "btn btn-danger w-100" %>

@@ -1,43 +1,43 @@
 <!-- This is index for: users-->
 <% provide(:title, "Members") %>
-<div class="form content">
-    <div class="card" style="width: 40rem;">
-        <div class="card-header">
-            Members
-        </div>
-        <div class="card-body">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <% if admin_user? %>
-                            <th scope="col">Actions</th>
-                        <% end %>
-                    </tr>
-                <thead>
-                <tbody>
-                    <% @users.each do |user| %>
-                        <tr>
-                            <td> 
-                                <%= gravatar_for user, size: 52 %>
-                                <%= link_to user.name, user %> 
-                            </td>
-                            <% if admin_user?%>
-                            <% next if user == current_user %>
-                                <td> 
-                                    <% if user.is_admin %>
-                                        <%= link_to "Remove from admin", admin_user_path(user, is_admin: false), method: :patch, class: "text-warning" %>
-                                    <% else %>
-                                        <%= link_to "Make admin", admin_user_path(user, is_admin: true), method: :patch, class: "text-info" %>
-                                    <% end %>
-                                    <%= link_to "delete", user_path(user), method: :delete, data: {confirm: "Are you sure?"}, class: "text-danger" %> 
-                                </td>
-                            <% end %>
-                        </tr>
-                    <% end %>
-                </tbody>
-            </table>
-            <%= will_paginate %>
-        </div>
+
+<div class="row mt-5">
+    <div class="col py-auto text-center">
+        <h1>Members</h1>
     </div>
+</div>
+
+<div class="row my-3">
+    <% @users.each do |user| %>
+        <div class="col-6 mt-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-2 py-auto">
+                            <%= gravatar_for user, size: 52 %>
+                        </div>
+                        <div class="col-10 d-flex justify-content-between">
+                            <div>
+                                <h4><%= link_to user.name, user, class: "link" %></h4>
+                                <p><%= user.email %></p>
+                            </div>
+                            <div>
+                                <% if admin_user? && user != current_user %>
+                                    <% if user.is_admin %>
+                                        <%= link_to "Remove from admin", admin_user_path(user, is_admin: false), method: :patch, class: "btn yellow-btn w-10 d-block" %>
+                                    <% else %>
+                                        <%= link_to "Make admin", admin_user_path(user, is_admin: true), method: :patch, class: "btn brown-btn w-10 d-block" %>
+                                    <% end %>
+                                    <%= link_to "Delete", user_path(user), method: :delete, data: {confirm: "Are you sure?"}, class: "btn red-btn w-10 d-block mt-1" %> 
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% end %>
+</div>
+<div class="row justify-content-center">
+    <%= will_paginate %>
 </div>

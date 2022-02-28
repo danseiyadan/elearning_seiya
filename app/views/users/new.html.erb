@@ -1,7 +1,11 @@
 <!-- This is new for: users -->
 <% provide(:title, "Signup") %>
-
-<div class="py-4">
-    <h2 class="text-center">Signup</h2>
-    <%= render "form", btn_msg: "Signup" %>
+<div class="row py-4 my-auto justify-content-md-center">
+    <div class="col-5">
+        <img src="/assets/signup-image.jpg" style="width: 100%;">
+    </div>
+    <div class="col-5">
+        <h1 class="text-center mt-4">Signup</h1>
+        <%= render "form", btn_msg: "Signup" %>
+    </div>
 </div>

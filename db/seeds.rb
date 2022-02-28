@@ -27,7 +27,7 @@ end
 
 20.times do |n|
 title = Faker::Hobby.unique.activity
-description = Faker::Lorem.sentence(word_count: 3)
+description = Faker::Lorem.sentence(word_count: 10)
 Category.create!(
   title: title,
   description: description)

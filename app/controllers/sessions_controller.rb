@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  before_action :already_loggedin, only: :new
+
   def new
   end
 
@@ -11,7 +13,8 @@ class SessionsController < ApplicationController
       flash[:success] = "Successfully logged in."
       redirect_to root_url
     else
-      redirect_to login_url # renderでもよさそう
+      flash.now[:danger] = "Invalid email or password"
+      render "new"
     end
   end
 
