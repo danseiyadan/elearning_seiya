@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_18_133714) do
+ActiveRecord::Schema.define(version: 2022_02_27_054643) do
+
+  create_table "activities", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "action_type", null: false
+    t.bigint "action_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["action_type", "action_id"], name: "index_activities_on_action_type_and_action_id"
+    t.index ["user_id"], name: "index_activities_on_user_id"
+  end
 
   create_table "answers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.bigint "lesson_id", null: false
@@ -66,6 +76,7 @@ ActiveRecord::Schema.define(version: 2022_02_18_133714) do
     t.index ["category_id"], name: "index_words_on_category_id"
   end
 
+  add_foreign_key "activities", "users"
   add_foreign_key "answers", "choices"
   add_foreign_key "answers", "lessons"
   add_foreign_key "answers", "words"

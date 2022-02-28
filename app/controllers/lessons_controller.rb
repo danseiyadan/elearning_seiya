@@ -2,6 +2,7 @@ class LessonsController < ApplicationController
   def create
     @category = Category.find(params[:category_id])
     @lesson = @category.lessons.build(lesson_params)
+    @lesson.build_activity(activity_params)
     @lesson.save
     redirect_to new_lesson_answer_path(@lesson.id)
   end
@@ -18,5 +19,9 @@ class LessonsController < ApplicationController
   private
   def lesson_params
     params.permit(:category_id, :user_id)
+  end
+
+  def activity_params
+    params.permit(:user_id)
   end
 end
