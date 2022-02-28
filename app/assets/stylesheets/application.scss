@@ -1,100 +1,100 @@
 @import "bootstrap/scss/bootstrap";
 .navbar {
-    background-color: #024959;
-    height: 5em;
+  background-color: #024959;
+  height: 5em;
 }
 
 .navbar-brand, .nav-link {
-    color: white;
+  color: white;
 }
 
 .nav-link {
-    transition: all 0.5s;
+  transition: all 0.5s;
 }
 
 .nav-link:hover {
-    color: #F2C12E;
+  color: #F2C12E;
 }
 
 .navbar-brand:hover {
-    color: white;
+  color: white;
 }
 
 .yellow-btn {
-    background-color: #F2C12E;
-    color: #593E25;
-    opacity: 0.9;
+  background-color: #F2C12E;
+  color: #593E25;
+  opacity: 0.9;
 }
 
 .yellow-btn:hover {
-    color: #593E25;
-    opacity: 1;
+  color: #593E25;
+  opacity: 1;
 }
 
 .link {
-    color: #024959;
-    opacity: 0.8;
+  color: #024959;
+  opacity: 0.8;
 }
 
 .link:hover {
-    color: #024959;
-    opacity: 1;
+  color: #024959;
+  opacity: 1;
 }
 
 .brown-btn {
-    background-color: #593E25;
-    color: white;
-    opacity: 0.8;
+  background-color: #593E25;
+  color: white;
+  opacity: 0.8;
 }
 
 .brown-btn:hover {
-    color: white;
-    opacity: 1;
+  color: white;
+  opacity: 1;
 }
 
 .red-btn {
-    background-color: #C9443A;
-    color: white;
-    opacity: 0.8;
+  background-color: #C9443A;
+  color: white;
+  opacity: 0.8;
 }
 
 .red-btn:hover {
-    color: white;
-    opacity: 1;
+  color: white;
+  opacity: 1;
 }
 
 .transparent-btn {
-    color: #593E25;
-    background-color: transparent;
+  color: #593E25;
+  background-color: transparent;
 }
 
 .transparent-btn:hover {
-    color: #593E25
+  color: #593E25
 }
 
 .page-item.active .page-link {
-    background-color: #024959;
-    border-color: #4C7278;
-    opacity: 0.9;
+  background-color: #024959;
+  border-color: #4C7278;
+  opacity: 0.9;
 }
 
 a, .page-link {
-    color: #024959;
+  color: #024959;
 }
 
 .page-item.disabled .page-link {
-    color: #024959;
-    pointer-events: none;
-    cursor: auto;
-    background-color: #fff;
-    border-color: #dee2e6;
+  color: #024959;
+  pointer-events: none;
+  cursor: auto;
+  background-color: #fff;
+  border-color: #dee2e6;
 }
 
 .score {
-    display: inline-block;
-    background-color: #024959;
-    opacity: 0.6;
-    color: white;
-    border-radius: 4px;
-    padding: 0 1em;
+  display: inline-block;
+  background-color: #024959;
+  opacity: 0.6;
+  color: white;
+  border-radius: 4px;
+  padding: 0 1em;
 }
