@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :lessons, dependent: :destroy
+  has_many :activities, dependent: :destroy
   default_scope -> { order("is_admin DESC")}
 
   validates :name, presence: true, length: { maximum: 50 }
