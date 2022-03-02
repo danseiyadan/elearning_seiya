@@ -4,13 +4,52 @@
     <div class="col-4">
         <div class="card">
             <div class="card-header">
-                Your Information
+                User Information
             </div>
             <div class="card-body text-center">
                 <%= gravatar_for(@user, size: 52) %>
                 <h5 class="mt-2"> <%= @user.name %> </h5>
                 <p> <%= @user.email %> </p>
-                <%= link_to "Edit profile", edit_user_path(@user), class: "btn btn-primary btn-lg" %>
+                <%= render "shared/stats" %>
+                <div class="mt-2">
+                    <% if @user == current_user %>
+                        <%= link_to "Edit profile", edit_user_path(@user), class: "btn brown-btn" %>
+                    <% else %>
+                        <%= render "users/follow_form" if logged_in? %>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-8">
+        <div class="card">
+            <div class="card-header">
+                Completed lessons
+            </div>
+            <div class="card-body">
+                <% if @lessons.any? %>
+                    <div class="row">
+                        <% @lessons.each do |lesson| %>
+                            <div class="col-6 mb-2">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="mr-2">
+                                            <%= lesson.category.title %>
+                                        </div>
+                                        <small class="text-muted">
+                                            <%=  time_ago_in_words(lesson.created_at) %> ago
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        <% end %>
+                    </div>
+                <% else %>
+                    <h3>No completed lessons</h3>
+                <% end %>
+                <div class="row justify-content-center mt-4">
+                    <%= will_paginate @lessons %>
+                </div>
             </div>
         </div>
     </div>

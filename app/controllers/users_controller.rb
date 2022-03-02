@@ -34,17 +34,31 @@ class UsersController < ApplicationController
   end
 
   def index
-    # @users = User.all
     @users = User.paginate(page: params[:page], per_page: 10)
   end
 
   def show
     @user = User.find(params[:id])
+    @lessons = @user.lessons.paginate(page: params[:page], per_page: 10)
   end  
 
   def destroy
     User.find(params[:id]).destroy
     redirect_to users_path
+  end
+
+  def following
+    @title = "Following users"
+    @user = User.find(params[:id])
+    @users = @user.following.paginate(page: params[:page], per_page: 5)
+    render "show_follow"
+  end
+
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page], per_page: 5)
+    render "show_follow"
   end
 
   private
