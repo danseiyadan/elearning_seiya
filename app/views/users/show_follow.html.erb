@@ -1,0 +1,63 @@
+<!-- フォロワーかフォローしている人の一覧ページ -->
+<!-- @titleはこれを呼び出しているメソッド（users_controller内）によって変わる（Following/Followers） -->
+<!-- @userはparamsから取っている -->
+<!-- @usersはこれを呼び出しているメソッド（users_controller内）によって変わる（@userのフォロワーかフォローしている人全員） -->
+<% provide(:title, @title)  %>
+
+<div class="row mt-5">
+    <div class="col py-auto text-center">
+        <h1><%= @title %></h1>
+    </div>
+</div>
+
+<div class="row mt-3">
+    <div class="col-4" style="height: 100%;">
+        <div class="card">
+            <div class="card-header">
+                User Information
+            </div>
+            <div class="card-body text-center">
+                <%= gravatar_for(@user, size: 52) %>
+                <h5 class="mt-2"> <%= link_to @user.name, user_path(@user), class: "link" %> </h5>
+                <p> <%= @user.email %> </p>
+                <section class="stats">
+                    <%= render "shared/stats" %>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="col-8">
+        <% if @users.any? %>
+            <% @users.each do |user| %>
+                <div class="col mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-2 py-auto">
+                                    <%= gravatar_for user, size: 52 %>
+                                </div>
+                                <div class="col-10 d-flex justify-content-between">
+                                    <div>
+                                        <h4><%= link_to user.name, user, class: "link" %></h4>
+                                        <p><%= user.email %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% end %>
+        <% else %>
+            <div class="col">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h4> <%= "No #{@title}" %> </h4>
+                    </div>
+                </div>
+            </div>
+        <% end %>
+        <div class="mt-4 ml-3">
+            <%= will_paginate @users %>
+        </div>
+    </div>
+</div>

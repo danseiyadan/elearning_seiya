@@ -4,10 +4,15 @@ Rails.application.routes.draw do
   get '/home', to: 'pages#home'
   get '/about', to: 'pages#about'
 
-  resources :users
-    namespace :admin do
-      resources :users, only: [:update]
+  resources :users do
+    member do
+      get :following, :followers
     end
+  end
+
+  namespace :admin do
+    resources :users, only: [:update]
+  end
 
   get "/login", to: 'sessions#new'
   get "/logout", to: 'sessions#destroy'
@@ -24,6 +29,8 @@ Rails.application.routes.draw do
   resources :lessons, only: [:create, :update, :index, :show] do
     resources :answers, only: [:new, :create]
   end
+
+  resources :relationships, only: [:create, :destroy]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

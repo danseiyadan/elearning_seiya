@@ -17,6 +17,9 @@
                         <%= gravatar_for(current_user, size: 52) %>
                         <h5 class="mt-2"> <%= current_user.name %> </h5>
                         <p> <%= current_user.email %> </p>
+                        <section class="stats">
+                            <%= render "shared/stats" %>
+                        </section>
                     </div>
                 </div>
             </div>
@@ -61,13 +64,31 @@
             <div class="card-body">
                 <% if @activities.any? %>
                     <% @activities.each do |activity| %>
-                        <% if activity.action_type == "Lesson" %>
+                        <% if activity.action_type == "Lesson" && activity.user_id == current_user.id%>
                             <p>
                                 You completed the lesson: <%= link_to activity.action.category.title, lesson_path(activity.action.id), class: "link" %><br>
                                 <small class="text-muted">
                                     <%=  time_ago_in_words(activity.created_at) %> ago
                                 </small>
                             </p>
+                        <% elsif activity.action_type == "Relationship" %>
+                            <% if activity.action %>
+                                <% if activity.user_id == current_user.id %>
+                                    <p>
+                                        You followed <%= link_to @users.find(activity.action.followed_id).name, user_path(activity.action.followed_id), class: "link" %> <br>
+                                        <small class="text-muted">
+                                            <%=  time_ago_in_words(activity.created_at) %> ago
+                                        </small>
+                                    </p>
+                                <% elsif activity.action.followed_id == current_user.id %>
+                                    <p>
+                                        <%= link_to @users.find(activity.action.follower_id).name, user_path(activity.action.follower_id), class: "link" %> followed you <br>
+                                        <small class="text-muted">
+                                            <%=  time_ago_in_words(activity.created_at) %> ago
+                                        </small>
+                                    </p>
+                                <% end %>
+                            <% end %>
                         <% end %>
                     <% end %>
                 <% else %>

@@ -30,7 +30,7 @@ module SessionsHelper
   # only_loggedin_usersの機能とかぶっているからいらないはず。。
 
   def current_user?(user)
-    return true if user == current_user
+    user == current_user
   end
   # current_userかどうかの判断。ビューで判断結果を使うために、application_controlerで読み込んでいるこのページで定義。
   # メソッドでも使えるからいくつか綺麗にできるかも？
