@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '~> 3.1.0'
+ruby '2.7.0'
 
 gem "faker"
 gem "will_paginate", "~> 3.2", ">= 3.2.1"
