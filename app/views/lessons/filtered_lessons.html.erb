@@ -1,10 +1,11 @@
-<!-- This is index for: lessons -->
-<% @user ||= current_user %>
-<% provide(:title, "Lessons") %>
+<!-- LearntかNot learntなカテゴリーの一覧ページ -->
+<!-- @titleはこれを呼び出しているメソッド（users_controller内）によって変わる（Learnt/Not learnt） -->
+<!-- @categoriesはこれを呼び出しているメソッド（users_controller内）によって変わる（URLのIDをもつユーザーのlearntかnot learntなカテゴリー全て） -->
+<% provide(:title, @title)  %>
 
 <div class="row mt-5">
     <div class="col py-auto text-center">
-        <h1>Lessons</h1>
+        <h1><%= @title %></h1>
     </div>
 </div>
 

@@ -15,7 +15,7 @@
                     </div>
                     <div class="card-body text-center">
                         <%= gravatar_for(current_user, size: 52) %>
-                        <h5 class="mt-2"> <%= current_user.name %> </h5>
+                        <h5 class="mt-2"> <%= link_to current_user.name, user_path(current_user.id), class: "link" %> </h5>
                         <p> <%= current_user.email %> </p>
                         <section class="stats">
                             <%= render "shared/stats" %>
@@ -32,17 +32,20 @@
                         <div class="row">
                             <% if @lessons.any? %>
                                 <% @lessons.each do |lesson| %>
-                                    <div class="col-4 text-center">
+                                    <div class="col-7 d-flex justify-content-start">
                                         <p>
                                             ・<%= link_to lesson.category.title, lesson_path(lesson.id), class: "link" %>
                                         </p>
                                     </div>
-                                    <div class="col-8 text-center">
+                                    <div class="col-5 d-flex justify-content-end">
                                         <p class="score">
-                                            <%= "Score: #{lesson.result} out of #{lesson.category.words.count}" %>
+                                            <%= "Score: #{lesson.result}/#{lesson.category.words.count}" %>
                                         </p>
                                     </div>
                                 <% end %>
+                                <div class="col-12 d-flex justify-content-center mt-3">
+                                    <%= will_paginate @lessons %>
+                                </div>
                             <% else %>
                                 <div class="col">
                                     <p>
@@ -64,7 +67,7 @@
             <div class="card-body">
                 <% if @activities.any? %>
                     <% @activities.each do |activity| %>
-                        <% if activity.action_type == "Lesson" && activity.user_id == current_user.id%>
+                        <% if activity.action_type == "Lesson" && activity.user_id == current_user.id && activity.action.result != nil %>
                             <p>
                                 You completed the lesson: <%= link_to activity.action.category.title, lesson_path(activity.action.id), class: "link" %><br>
                                 <small class="text-muted">
@@ -92,7 +95,7 @@
                         <% end %>
                     <% end %>
                 <% else %>
-                    <h3>Start taking your first lesson from <%= link_to "here", lessons_path, class: "link"  %></h3>
+                    <h3>No activities to show.<br>You can start taking your first lesson from <%= link_to "here", lessons_path, class: "link"  %></h3>
                 <% end %>
             </div>
         </div>

@@ -13,7 +13,7 @@ class Admin::WordsController < ApplicationController
     @category = Category.find(params[:category_id])
     @word = @category.words.build(word_params)
     if @word.save
-      flash[:success] = "New word added!"
+      flash[:success] = "New word added"
       redirect_to admin_category_path(@category.id)
     else
       render "new"
@@ -29,7 +29,7 @@ class Admin::WordsController < ApplicationController
     @category = Category.find(params[:category_id])
     @word = @category.words.find(params[:id])
     if @word.update(word_params)
-      flash[:success] = "Word updated!"
+      flash[:success] = "Word updated"
       redirect_to admin_category_path(@category.id)
     else
       render "edit"

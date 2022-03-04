@@ -4,13 +4,19 @@ class RelationshipsController < ApplicationController
     follow_action = current_user.follow(@user)
     follow_action.build_activity(activity_params)
     follow_action.save
-    redirect_to @user
+    respond_to do |format|
+      format.html {redirect_to @user}
+      format.js
+    end
   end
 
   def destroy
     @user = Relationship.find(params[:id]).followed # unfollowしたいユーザー
     current_user.unfollow(@user)
-    redirect_to @user
+    respond_to do |format|
+      format.html {redirect_to @user}
+      format.js
+    end
   end
 
   private
