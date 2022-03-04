@@ -8,7 +8,7 @@ class Admin::CategoriesController < ApplicationController
   def create
     @category = Category.new(category_params)
     if @category.save
-      flash[:success] = "New lesson added!"
+      flash[:success] = "New lesson added"
       redirect_to admin_categories_path
     else
       render "new"
@@ -22,7 +22,7 @@ class Admin::CategoriesController < ApplicationController
   def update
     @category = Category.find(params[:id])
     if @category.update(category_params)
-      flash[:success] = "Lesson information updated!"
+      flash[:success] = "Lesson information updated"
       redirect_to admin_categories_path
     else
       render "edit"

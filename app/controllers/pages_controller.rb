@@ -4,9 +4,8 @@ class PagesController < ApplicationController
       redirect_to login_path
     end
     if logged_in?
-      # @activities = Activity.where("user_id = ?", current_user.id)
       @activities = Activity.all
-      @lessons = current_user.lessons.where("created_at >= ?", Date.today)
+      @lessons = current_user.lessons.where("created_at >= ?", Date.today).where("result IS NOT NULL").paginate(page: params[:page], per_page: 3)
       @users = User.all
     end
   end

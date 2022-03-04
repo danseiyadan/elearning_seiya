@@ -8,7 +8,25 @@
 </div>
 
 <div class="row my-3">
+        <div class="col-6 mt-2">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-2 py-auto">
+                            <%= gravatar_for current_user, size: 52 %>
+                        </div>
+                        <div class="col-10 d-flex justify-content-between">
+                            <div>
+                                <h4><%= link_to current_user.name, current_user, class: "link" %></h4>
+                                <p><%= current_user.email %></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     <% @users.each do |user| %>
+        <% next if user == current_user %>
         <div class="col-6 mt-2">
             <div class="card">
                 <div class="card-body">

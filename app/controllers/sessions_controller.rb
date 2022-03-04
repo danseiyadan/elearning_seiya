@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
     # 多分、params[:session]のためにform上でscope: sessionとしている。
     if user && user.authenticate(params[:session][:password])
       log_in(user) # sessionhelperのアクションに上記で代入したuserを入れる。
-      flash[:success] = "Successfully logged in."
+      flash[:success] = "Successfully logged in"
       redirect_to root_url
     else
       flash.now[:danger] = "Invalid email or password"
@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
 
   def destroy #sessionでのdestroyはすなわちlogout
     log_out # sessionhelperで定義されている。
-    flash[:success] = "Successfully logged out."
+    flash[:success] = "Successfully logged out"
     redirect_to root_url
   end
 end

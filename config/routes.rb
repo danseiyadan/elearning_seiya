@@ -6,7 +6,7 @@ Rails.application.routes.draw do
 
   resources :users do
     member do
-      get :following, :followers
+      get :following, :followers, :learnt, :not_learnt
     end
   end
 

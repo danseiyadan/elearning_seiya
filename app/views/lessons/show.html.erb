@@ -1,47 +1,56 @@
 <!-- This is show for: lessons -->
 <% provide(:title, "Result of #{@lesson.category.title}") %>
-<div class="form content">
-    <div class="card" style="width: 40rem;">
-        <div class="card-header">
-            <%= "#{@lesson.category.title} - Result" %>
-        </div>
-        <div class="card-body">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Word</th>
-                        <th scope="col">Answer</th>
-                        <th scope="col">Your answer</th>
-                        <th scope="col">Result</th>
-                    </tr>
-                <thead>
-                <tbody>
-                    <% @answers.each do |answer| %>
+
+<div class="row mt-5 justify-content-md-center">
+    <div class="col-10">
+        <div class="card">
+            <div class="card-header text-center">
+                <h2><%= "#{@lesson.category.title} - Result" %></h2>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td> 
-                                <%= answer.word.content %> 
-                            </td>
-                            <td> 
-                                <%= answer.word.choices.find_by(is_correct: true).content %> 
-                            </td>
-                            <td> 
-                                <%= answer.word.choices.find(answer.choice_id).content %> 
-                            </td>
-                            <% if answer.word.choices.find_by(is_correct: true).content == answer.word.choices.find(answer.choice_id).content %>
-                                <td> 
-                                    ◯
-                                </td>
-                            <% else %>
-                                <td> 
-                                    ×
-                                </td>
-                            <% end %>
+                            <th scope="col">Word</th>
+                            <th scope="col">Answer</th>
+                            <th scope="col">Your answer</th>
+                            <th scope="col">Result</th>
                         </tr>
-                    <% end %>
-                </tbody>
-            </table>
-            <%= "Your score is #{@lesson.result} out of #{@lesson.answers.count}" %>
+                    </thead>
+                    <tbody>
+                        <% @answers.each do |answer| %>
+                            <tr>
+                                <td> 
+                                    <%= answer.word.content %> 
+                                </td>
+                                <td> 
+                                    <%= answer.word.choices.find_by(is_correct: true).content %> 
+                                </td>
+                                <td> 
+                                    <%= answer.word.choices.find(answer.choice_id).content %> 
+                                </td>
+                                <td>
+                                    <% if answer.word.choices.find_by(is_correct: true).content == answer.word.choices.find(answer.choice_id).content %>
+                                        ◯
+                                    <% else %>
+                                        ×
+                                    <% end %>
+                                </td>
+                            </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+                <div class="row">
+                    <div class="col-12 py-auto align-self-center text-center">
+                        <h5 class="score" style="height: 2em; line-height: 2em;">
+                            <%= "Your score is #{@lesson.result} out of #{@lesson.answers.count}" %>
+                        </h5>
+                    </div>
+                    <div class="col-12 text-center">
+                        <%= link_to "Go back to list of lessons", lessons_path, class:"btn transparent-btn" %>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-<%= link_to "Go back to list of lessons", lessons_path %>

@@ -1,8 +1,10 @@
 class LessonsController < ApplicationController
+  before_action :invalid_lesson, only: :show
+  before_action :only_loggedin_users
+
   def create
     @category = Category.find(params[:category_id])
     @lesson = @category.lessons.build(lesson_params)
-    @lesson.build_activity(activity_params)
     @lesson.save
     redirect_to new_lesson_answer_path(@lesson.id)
   end
@@ -21,7 +23,11 @@ class LessonsController < ApplicationController
     params.permit(:category_id, :user_id)
   end
 
-  def activity_params
-    params.permit(:user_id)
+  def invalid_lesson
+    @lesson = Lesson.find(params[:id])
+    if @lesson.result.nil? || @lesson.user_id != current_user.id
+      flash[:danger] = "Invalid action"
+      redirect_to lessons_path
+    end
   end
 end

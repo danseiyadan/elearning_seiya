@@ -1,4 +1,8 @@
 class AnswersController < ApplicationController
+  before_action :only_loggedin_users
+  before_action :prohibit_lesson_retake
+  before_action :different_user_lesson
+
   def new 
     @lesson = Lesson.find(params[:lesson_id])
     @answer = @lesson.answers.build
@@ -13,6 +17,7 @@ class AnswersController < ApplicationController
       redirect_to new_lesson_answer_path(@lesson.id, page: params[:page])
     else
       @lesson.update(result: check_results)
+      @lesson.create_activity!(activity_params)
       redirect_to @lesson
     end
   end
@@ -20,6 +25,10 @@ class AnswersController < ApplicationController
   private
   def answer_params
     params.permit(:choice_id, :word_id, :lesson_id)
+  end
+
+  def activity_params
+    params.permit(:user_id)
   end
 
   def check_results
@@ -32,5 +41,21 @@ class AnswersController < ApplicationController
       end
     end
     return result
+  end
+
+  def prohibit_lesson_retake
+    lesson = Lesson.find(params[:lesson_id])
+    unless lesson.result.nil?
+      flash[:danger] = "Invalid action"
+      redirect_to lessons_path
+    end
+  end
+
+  def different_user_lesson
+    lesson = Lesson.find(params[:lesson_id])
+    if lesson.user != current_user
+      flash[:danger] = "Invalid action"
+      redirect_to lessons_path
+    end
   end
 end

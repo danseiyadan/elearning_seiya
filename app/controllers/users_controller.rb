@@ -2,7 +2,8 @@ class UsersController < ApplicationController
   # before_action :logged_in_user, except: [:new, :create]
   # only_loggedin_usersと機能がかぶっているからいらないはず。
   before_action :correct_user, only: [:edit, :destroy]
-  before_action :only_loggedin_users, only: [:index, :show, :edit, :update, :destroy]
+  before_action :only_correct_user, only: [:learnt, :not_learnt]
+  before_action :only_loggedin_users, only: [:index, :show, :edit, :update, :destroy, :following, :followers, :learnt, :not_learnt]
   before_action :already_loggedin, only: :new
 
   def new
@@ -12,7 +13,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:success] = "Account successfully created!"
+      flash[:success] = "Account successfully created"
       redirect_to root_url
     else
       render "new"
@@ -26,7 +27,7 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
-      flash[:success] = "Your profile has been updated."
+      flash[:success] = "Profile updated"
       redirect_to @user
     else
       render "edit"
@@ -39,7 +40,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @lessons = @user.lessons.paginate(page: params[:page], per_page: 10)
+    @lessons = @user.lessons.where("result IS NOT NULL").paginate(page: params[:page], per_page: 10)
   end  
 
   def destroy
@@ -61,6 +62,21 @@ class UsersController < ApplicationController
     render "show_follow"
   end
 
+  # the 2 actions below are to display learnt and not learnt lessons
+  def learnt
+    @title = "Learnt lessons"
+    @user = User.find(params[:id])
+    @categories = Category.select { |category| category.lessons.where("user_id = ?", @user.id).where("result IS NOT NULL").any?  }.paginate(page: params[:page], per_page: 10)
+    render "lessons/filtered_lessons"
+  end
+
+  def not_learnt
+    @title = "Not learnt lessons"
+    @user = User.find(params[:id])
+    @categories = Category.all.reject { |category| category.lessons.where("user_id = ?", @user.id).where("result IS NOT NULL").any?  }.paginate(page: params[:page], per_page: 10)
+    render "lessons/filtered_lessons"
+  end
+
   private
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
@@ -69,7 +85,15 @@ class UsersController < ApplicationController
   def correct_user 
     user = User.find(params[:id])
     unless user == current_user || admin_user?
-      flash[:danger] = "You are not authorized."
+      flash[:danger] = "You are not authorized"
+      redirect_back fallback_location: root_path
+    end
+  end
+
+  def only_correct_user
+    user = User.find(params[:id])
+    unless user == current_user
+      flash[:danger] = "You are not authorized"
       redirect_back fallback_location: root_path
     end
   end
