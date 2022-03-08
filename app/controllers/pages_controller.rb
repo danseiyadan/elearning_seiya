@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
   def home
     unless logged_in?
-      redirect_to login_path
+      redirect_to about_path
     end
     if logged_in?
       @activities = Activity.all
