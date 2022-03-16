@@ -7,7 +7,6 @@
     <div class="col-5">
         <h1 class="text-center mt-4">Login</h1>
         <%= form_with(url: sessions_path, scope: :session, local: true) do |f| %>
-            <!-- scope: sessionはsession controllerで受け取るため？ -->
             <div class="my-3">
                 <%= f.email_field :email, class: "form-control", placeholder: "Email" %>
             </div>

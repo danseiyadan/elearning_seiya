@@ -1,5 +1,5 @@
 module UsersHelper
-  def gravatar_for(user, options = { size: 50}) # カッコ内の書き方に合わせてビューを記載する。
+  def gravatar_for(user, options = { size: 50})
     gravatar_id = Digest::MD5::hexdigest(user.email.downcase)
     size = options[:size]
     gravatar_url = "https://secure.gravatar.com/avatar/#{gravatar_id}?s=#{size}"

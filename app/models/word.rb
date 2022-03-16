@@ -12,14 +12,11 @@ class Word < ApplicationRecord
   def only_one_correct_answer
     correct_answers = choices.select {|choice| choice.is_correct == true}.length
     if correct_answers != 1
-      # return false
       return errors.add(:word, "should have one correct answer.")
     end
-    # return true
   end
 
   def unique_choice
-    # check_same_choices = choices.select(:content).distinct.length
     check_same_choices = choices.uniq {|choice| choice.content }.length
     if check_same_choices != 3
       return errors.add(:word, "cannot have same choices.")
