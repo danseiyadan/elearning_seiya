@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-  # before_action :logged_in_user, except: [:new, :create]
-  # only_loggedin_usersと機能がかぶっているからいらないはず。
   before_action :correct_user, only: [:edit, :destroy]
   before_action :only_correct_user, only: [:learnt, :not_learnt]
   before_action :only_loggedin_users, only: [:index, :show, :edit, :update, :destroy, :following, :followers, :learnt, :not_learnt]

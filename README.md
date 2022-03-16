@@ -1,24 +1,37 @@
-# README
+# E-learning App 概要
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+URL: https://els-seiya2.herokuapp.com/
 
-Things you may want to cover:
+このサイトは単語勉強を目的としたeラーニングのサンプルアプリケーションです。
 
-* Ruby version
+全ての機能を使用するには、以下の情報を使ってログインしてください。
 
-* System dependencies
+・Email: admin@email.com
 
-* Configuration
+・Password: password
 
-* Database creation
+このアプリケーションは、プログラミングスクールKredoのRuby on Railsコースにて作成したものを改良したものです。
 
-* Database initialization
+# 使用技術
 
-* How to run the test suite
+・Ruby 3.0.3
 
-* Services (job queues, cache servers, search engines, etc.)
+・Ruby on Rails 6.0.4
 
-* Deployment instructions
+・MySQL 5.7
 
-* ...
+・Docker/Docker-compose
+
+# 機能一覧
+・ユーザー登録、ログイン機能(devise不使用)
+
+　→管理者ユーザーと一般ユーザーの二種類が存在
+
+　→管理者ユーザーのみレッスンの作成とユーザー管理が可能
+・レッスン作成機能
+
+・レッスン受講機能
+
+・フォロー機能（Ajax）
+
+・ページネーション機能(will_paginate)
